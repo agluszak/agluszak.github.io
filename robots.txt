@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://agluszak.github.io/sitemap.xml 
