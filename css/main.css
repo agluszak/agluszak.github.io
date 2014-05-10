@@ -1,0 +1,22 @@
+.header {
+	display:block;
+	height: 10%;
+}
+
+.left {
+	display:block;
+	float: left;
+	width: 40%;
+}
+
+.left {
+	display:block;
+	float: right;
+	width: 40%;
+}
+
+.footer {
+	display:block;
+	clear:both;
+	height: 10%;
+}
