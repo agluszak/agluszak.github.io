@@ -1,0 +1,40 @@
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: start;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.dane {
+	position:fixed;
+	bottom:20px;
+	background-color:pink;
+}
+body {
+    background-image: url("http://gify.joe.pl/gifs/zawody-i-ludzie/studenci/idacy-maly-ludzik.gif");
+    background-repeat: repeat;
+}
+
+svg {
+	background-color: rgba(255,0,0,0.8);
+}
