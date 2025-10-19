@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Generator maila z uwagami do projektu MPZP rejonu ul. Twardej – część B. Wpisz dane, otrzymaj gotowy tekst i wyślij jednym kliknięciem – wszystko lokalnie w przeglądarce." />
+    <meta name="color-scheme" content="dark" />
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #121926;
+            --muted: #2a3441;
+            --text: #e6edf3;
+            --sub: #b7c3cf;
+            --accent: #7cd2ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font: 16px/1.5 system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        header {
+            background: linear-gradient(180deg, rgba(124, 210, 255, .12), rgba(124, 210, 255, 0));
+            border: 1px solid var(--muted);
+            padding: 14px;
+            border-radius: 14px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 1.6rem;
+        }
+
+        p.lead {
+            margin: 0;
+            color: var(--sub);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 8px;
+            align-items: start;
+        }
+
+        @media (min-width:880px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grid .btns {
+                grid-column: 1 / -1;
+            }
+        }
+
+        fieldset {
+            border: 1px solid var(--muted);
+            border-radius: 14px;
+            padding: 12px 14px;
+            background: var(--panel);
+        }
+
+        legend {
+            padding: 0 8px;
+            color: var(--sub);
+            font-size: .95rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 8px 0 6px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 9px 11px;
+            background: #0e1523;
+            border: 1px solid var(--muted);
+            color: var(--text);
+            border-radius: 12px;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        input:required:invalid {
+            border-color: #ef4444;
+        }
+
+        .inline {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        a.a-btn,
+        button.btn {
+            appearance: none;
+            border: 1px solid #334155;
+            background: #101827;
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        a.a-btn.primary,
+        button.btn.primary {
+            background: #0b1526;
+            border-color: #2b435f;
+            box-shadow: inset 0 0 0 1px rgba(124, 210, 255, .25);
+        }
+
+        a.a-btn.disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        #mailto.primary {
+            font-size: 1.05rem;
+            padding: 14px 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        a.a-btn:focus,
+        button.btn:focus,
+        input:focus,
+        textarea:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        figure.protest {
+            margin: 16px 0 20px;
+        }
+
+        figure.protest img {
+            width: 100%;
+            height: auto;
+            max-height: 240px;
+            object-fit: cover;
+            border: 1px solid var(--muted);
+            border-radius: 12px;
+            display: block;
+        }
+
+        figure.protest figcaption {
+            font-size: .75rem;
+            color: var(--sub);
+            margin-top: 6px;
+        }
+
+        .kicker {
+            font-size: .9rem;
+            color: var(--sub);
+            margin-top: 6px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: .8rem;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--muted);
+            color: var(--sub);
+        }
+
+        .foot {
+            margin-top: 16px;
+            color: var(--sub);
+            font-size: .9rem;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header role="banner">
+            <h1>Generator maila z uwagami do MPZP</h1>
+            <p class="lead">Ta strona powstała oddolnie, by <strong>ułatwić mieszkańcom wysłanie uwagi</strong> do
+                projektu planu miejscowego dla rejonu ul. Twardej – część B. Chcemy więcej zieleni, przyjaznych miejsc
+                do spędzania czasu. Sprzeciwiamy się budowie bloku przez SM Starówka na miejscu zieleni. <a
+                    href="https://warszawa.naszemiasto.pl/protest-mieszkancow-na-warszawskiej-woli-przeciwko/ar/c1-9646113"
+                    target="_blank" rel="noopener noreferrer">Zobacz protest mieszkańców z 2024 roku</a>.</p>
+            <p class="kicker">Adresat: <span class="badge" id="badgeTo">sekretariat.BAiPP@um.warszawa.pl</span>. Termin
+                składania uwag: <span class="badge">30 października 2025</span>. </p>
+            <p class="kicker">Oficjalne konsultacje: <a
+                    href="https://konsultacje.um.warszawa.pl/processes/mpzp-Twarda-B" target="_blank"
+                    rel="noopener noreferrer">strona Urzędu m.st. Warszawy</a>.</p>
+        </header>
+
+        <figure class="protest">
+            <img src="protest.jpg"
+                alt="Protest mieszkańców w rejonie ul. Twardej – transparenty i uczestnicy domagający się zachowania zieleni"
+                loading="lazy" decoding="async" />
+            <figcaption>Protest mieszkańców przeciwko zabudowie w rejonie ul. Twardej</figcaption>
+        </figure>
+
+        <form id="form" class="grid">
+            <fieldset style="margin:0">
+                <legend>Dane składającego (wymagane)</legend>
+                <div class="inline">
+                    <div>
+                        <label for="name">Imię i nazwisko</label>
+                        <input id="name" name="name" type="text" placeholder="Jan Kowalski" required
+                            autocomplete="name" />
+                    </div>
+                    <div>
+                        <label for="email">E‑mail</label>
+                        <input id="email" name="email" type="email" placeholder="jan.kowalski@example.com" required
+                            autocomplete="email" />
+                    </div>
+                </div>
+                <label for="addr">Adres zamieszkania</label>
+                <input id="addr" name="addr" type="text" placeholder="ul. Przykładowa 1/2, 00-000 Warszawa" required
+                    autocomplete="street-address" />
+                <div class="inline">
+                    <div>
+                        <label for="phone">Telefon (opcjonalnie)</label>
+                        <input id="phone" name="phone" type="tel" placeholder="+48 600 000 000" autocomplete="tel" />
+                    </div>
+                    <div>
+                        <label for="status">Status (opcjonalnie)</label>
+                        <input id="status" name="status" type="text"
+                            placeholder="np. mieszkanka budynku przy ul. Twardej 56A" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset style="margin:0">
+                <legend>Dodatkowe uwagi (opcjonalnie)</legend>
+                <label for="extra" class="visually-hidden">Dodatkowe uwagi</label>
+                <textarea id="extra" name="extra"
+                    placeholder="Możesz dodać własne argumenty lub doprecyzowania."></textarea>
+            </fieldset>
+
+            <div class="btns" style="grid-column:1 / -1; margin:4px 0 0">
+                <a id="mailto" class="a-btn primary" href="#" target="_blank" rel="noopener" aria-disabled="true"
+                    title="Uzupełnij wymagane dane">Wyślij!</a>
+            </div>
+        </form>
+
+        <footer class="foot" aria-label="Informacje i prywatność">
+            <p>Ta strona działa w 100% po stronie przeglądarki. Nie używa ciasteczek, nie wysyła i nie zapisuje żadnych
+                danych. Wszystkie wpisane treści pozostają u Ciebie.</p>
+        </footer>
+    </div>
+
+    <script>
+        const $ = (sel) => document.querySelector(sel);
+        const TO = 'sekretariat.BAiPP@um.warszawa.pl';
+        const SUBJECT = 'Uwaga do projektu MPZP rejonu ul. Twardej – część B';
+
+        function sanitize(s) {
+            return (s || '').toString().replace(/[\x00-\x09\x0B\x0C\x0E-\x1F]/g, '');
+        }
+
+        function normalizeLines(s) {
+            return (s || '')
+                .replace(/\r\n?|\n/g, '\n')
+                .replace(/\n{3,}/g, '\n\n');
+        }
+
+        function formatDatePL(d) {
+            return new Intl.DateTimeFormat('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
+        }
+
+        function buildBody() {
+            const name = sanitize($('#name')?.value.trim());
+            const email = sanitize($('#email')?.value.trim());
+            const addr = sanitize($('#addr')?.value.trim());
+            const phone = sanitize($('#phone')?.value.trim());
+            const status = sanitize($('#status')?.value.trim());
+            const extraRaw = $('#extra')?.value || '';
+            const extra = normalizeLines(sanitize(extraRaw.trim()));
+            const dateStr = formatDatePL(new Date());
+
+            const lines = [];
+            // Nagłówek i dotyczy
+            lines.push('Uwaga do projektu MPZP "Rejon ulicy Twardej – część B"');
+            lines.push('');
+            lines.push('Dotyczy: wyłożonego do publicznego wglądu projektu MPZP "Rejon ulicy Twardej – część B".');
+            lines.push('');
+            // Sekcja 1
+            lines.push('1) Teren 12.4.MW-U (między ul. Twardą, Sienną i Żelazną)');
+            lines.push('');
+            lines.push('Wnoszę o utrzymanie bez zmian projektowanych rozwiązań, w szczególności:');
+            lines.push('- ustanowienia strefy zieleni (zieleń urządzona i mała architektura, bez zabudowy kubaturowej),');
+            lines.push('- ogólnodostępnego powiązania pieszego przez teren wraz z zakazem grodzenia i określeniem minimalnej szerokości zapewniającej komfort ruchu,');
+            lines.push('- ochrony istniejących drzew oraz wprowadzenia obowiązku nasadzeń kompensacyjnych w razie kolizji,');
+            lines.push('- ograniczeń gabarytów zabudowy w pozostałej części terenu.');
+            lines.push('');
+            lines.push('Uzasadnienie:');
+            lines.push('Mieszkańcy okolicznych budynków jednoznacznie sprzeciwiają się zabudowie tej działki. W 2024 r. przeprowadzono protesty społeczne i złożono liczne uwagi popierające utrzymanie zieleni i ciągu pieszego. W sprawie prób realizacji inwestycji toczą się postępowania (w tym przed SKO); SM "Starówka" nie posiada decyzji o warunkach zabudowy ani pozwolenia na budowę. Zachowanie obecnych zapisów planu jest konieczne dla ochrony interesu publicznego: zapewnienia dostępu do światła dziennego, przewietrzania kwartału, funkcji rekreacyjnych i klimatycznych zieleni oraz bezpiecznych powiązań pieszych.');
+            lines.push('');
+            lines.push('Wnoszę o nieuwzględnianie uwag dążących do dopuszczenia nowej kubatury kosztem zieleni, ograniczenia ciągu pieszego lub zwiększenia parametrów zabudowy.');
+            lines.push('');
+            // Sekcja 2
+            lines.push('2) Skwer Zgrupowania AK "Chrobry II" (kwartał Chmielna–Twarda–Miedziana)');
+            lines.push('');
+            lines.push('Popieram i wnoszę o utrzymanie zapisów wzmacniających funkcję skweru publicznego. Obecnie teren ten jest skwerem jedynie teoretycznie.');
+            lines.push('- priorytetem powinno być pełne urządzenie skweru (zieleń wysoka i retencyjna, mała architektura, możliwość lokalizacji placu zabaw),');
+            lines.push('- należy ograniczać parkowanie naziemne i powierzchnie utwardzone do niezbędnego minimum,');
+            lines.push('- nasadzenia drzew i krzewów prowadzić zgodnie z miejskimi standardami (ochrona bryły korzeniowej, misy glebowe, dobór gatunkowy wspierający retencję).');
+            lines.push('');
+            // Sekcja 3
+            lines.push('3) Szpalery drzew i zazielenianie ulic');
+            lines.push('');
+            lines.push('Popieram utrzymanie i uzupełnianie szpalerów drzew oraz pasów zieleni przyulicznej wzdłuż ul. Twardej, Chmielnej, Siennej, Żelaznej i Miedzianej. Wnoszę o przyjęcie zasady pierwszeństwa relokacji infrastruktury technicznej nad wycinką oraz o pełną, jakościową kompensację przy nieuniknionych kolizjach.');
+            lines.push('');
+            // Sekcja 4
+            lines.push('4) Dostępność i ciągłość przestrzeni publicznych');
+            lines.push('');
+            lines.push('Popieram zapisy zapewniające ogólnodostępność terenów zieleni i przejść pieszych oraz zakaz grodzenia przestrzeni pełniących funkcje komunikacyjne i rekreacyjne dla mieszkańców.');
+            lines.push('');
+            lines.push('---');
+            lines.push('');
+            lines.push('Obszar objęty planem charakteryzuje się niedoborem dostępnej zieleni i miejsc do spędzania czasu. Projektowane rozwiązania:');
+            lines.push('- podnoszą jakość życia mieszkańców (mikroklimat, cień, retencja, rekreacja codzienna),');
+            lines.push('- chronią nasłonecznienie i przewietrzanie istniejącej zabudowy,');
+            lines.push('- wzmacniają bezpieczeństwo i ciągłość ruchu pieszego,');
+            lines.push('- realizują ład przestrzenny i interes publiczny, który w tej sprawie powinien przeważać nad interesem inwestycyjnym pojedynczego podmiotu.');
+            lines.push('');
+            lines.push('---');
+            lines.push('');
+            // Konkluzja
+            lines.push('Konkluzja');
+            lines.push('');
+            lines.push('Wnoszę o uchwalenie planu w zaproponowanym kształcie oraz o odrzucenie uwag osłabiających ochronę zieleni, ciągów pieszych i parametry ograniczające dogęszczanie, w szczególności w odniesieniu do terenu 12.4.MW-U.');
+            lines.push('');
+            lines.push('Podziękowanie: Dziękuję autorom planu i zespołowi BAiPP za uwzględnienie głosu społeczności w projektowanych rozwiązaniach. Wyrażam nadzieję, że przedstawione zapisy zostaną utrzymane w finalnej uchwale dla dobra mieszkańców i jakości przestrzeni publicznej.');
+            if (extra) {
+                lines.push('');
+                lines.push('Dodatkowe uwagi');
+                lines.push('');
+                lines.push(extra);
+            }
+            lines.push('');
+            lines.push('—');
+            lines.push(`${dateStr}`);
+            if (name) lines.push(name);
+            if (addr) lines.push(addr);
+            if (status) lines.push(status);
+            if (phone) lines.push('tel.: ' + phone);
+            if (email) lines.push(email);
+            return lines.join('\n');
+        }
+
+        function missingRequired() {
+            const missing = [];
+            const nameEl = document.getElementById('name');
+            const emailEl = document.getElementById('email');
+            const addrEl = document.getElementById('addr');
+            if (!nameEl.value.trim()) missing.push('imię i nazwisko');
+            if (!addrEl.value.trim()) missing.push('adres');
+            if (!emailEl.value.trim() || !emailEl.checkValidity()) missing.push('e‑mail (nieprawidłowy)');
+            return missing;
+        }
+
+        function updateUI() {
+            const body = buildBody();
+            const missing = missingRequired();
+            const mailto = $('#mailto');
+            if (missing.length > 0) {
+                if (mailto) {
+                    mailto.classList.add('disabled');
+                    mailto.setAttribute('aria-disabled', 'true');
+                    mailto.dataset.disabled = 'true';
+                    mailto.setAttribute('href', '#');
+                    mailto.setAttribute('title', 'Uzupełnij: ' + missing.join(', '));
+                }
+                return;
+            }
+            const bodyForMailto = body.replace(/\n/g, '\r\n');
+            const params = new URLSearchParams();
+            params.set('subject', SUBJECT);
+            params.set('body', bodyForMailto);
+            const href = `mailto:${TO}?${params.toString()}`;
+            if (mailto) {
+                mailto.classList.remove('disabled');
+                mailto.removeAttribute('aria-disabled');
+                delete mailto.dataset.disabled;
+                mailto.removeAttribute('title');
+                mailto.setAttribute('href', href);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('form');
+            form.addEventListener('input', updateUI);
+            form.addEventListener('change', updateUI);
+            const mailto = document.getElementById('mailto');
+            mailto.addEventListener('click', (e) => {
+                if (mailto.dataset.disabled === 'true') {
+                    e.preventDefault();
+                }
+            });
+            updateUI();
+        });
+    </script>
+</body>
+
+</html>
