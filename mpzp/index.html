@@ -249,11 +249,6 @@
         </figure>
 
         <form id="form" class="grid">
-            <div class="btns" style="grid-column:1 / -1; margin:4px 0 0">
-                <a id="mailto" class="a-btn primary" href="#" target="_blank" rel="noopener" aria-disabled="true"
-                    title="Uzupełnij wymagane dane">Wyślij!</a>
-            </div>
-
             <fieldset style="margin:0">
                 <legend>Dane składającego (wymagane)</legend>
                 <div class="inline">
@@ -290,6 +285,11 @@
                 <textarea id="extra" name="extra"
                     placeholder="Możesz dodać własne argumenty lub doprecyzowania."></textarea>
             </fieldset>
+
+            <div class="btns" style="grid-column:1 / -1; margin:4px 0 0">
+                <a id="mailto" class="a-btn primary" href="#" target="_blank" rel="noopener" aria-disabled="true"
+                    title="Uzupełnij wymagane dane">Wyślij!</a>
+            </div>
 
         </form>
 
@@ -424,11 +424,12 @@
                 }
                 return;
             }
+            // Użyj ręcznego kodowania zamiast URLSearchParams, żeby spacje były %20 (a nie '+') na mobilnych klientach poczty
             const bodyForMailto = body.replace(/\n/g, '\r\n');
-            const params = new URLSearchParams();
-            params.set('subject', SUBJECT);
-            params.set('body', bodyForMailto);
-            const href = `mailto:${TO}?${params.toString()}`;
+            const enc = (s) => encodeURIComponent(s)
+                // RFC 3986 poprawka dla kilku znaków (opcjonalne, bezpieczeństwo)
+                .replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
+            const href = `mailto:${TO}?subject=${enc(SUBJECT)}&body=${enc(bodyForMailto)}`;
             if (mailto) {
                 mailto.classList.remove('disabled');
                 mailto.removeAttribute('aria-disabled');
