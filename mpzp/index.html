@@ -139,6 +139,21 @@
             text-decoration: none;
         }
 
+        /* Wtórny, mniejszy przycisk (kopiuj) */
+        .btn.secondary {
+            font-weight: 500;
+            padding: 8px 12px;
+            font-size: .85rem;
+            opacity: .9;
+        }
+
+        /* Wspólny disabled dla obu typów */
+        a.a-btn.disabled,
+        button.btn.disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
         a.a-btn.primary,
         button.btn.primary {
             background: #0b1526;
@@ -289,6 +304,9 @@
             <div class="btns" style="grid-column:1 / -1; margin:4px 0 0">
                 <a id="mailto" class="a-btn primary" href="#" target="_blank" rel="noopener" aria-disabled="true"
                     title="Uzupełnij wymagane dane">Wyślij!</a>
+                <button id="copyBtn" type="button" class="btn secondary disabled" aria-disabled="true" disabled
+                    title="Najpierw uzupełnij wymagane dane">Skopiuj tekst (jeśli wysyłanie nie działa)</button>
+                <div id="copyStatus" class="visually-hidden" aria-live="polite"></div>
             </div>
 
         </form>
@@ -414,6 +432,7 @@
             const body = buildBody();
             const missing = missingRequired();
             const mailto = $('#mailto');
+            const copyBtn = document.getElementById('copyBtn');
             if (missing.length > 0) {
                 if (mailto) {
                     mailto.classList.add('disabled');
@@ -421,6 +440,12 @@
                     mailto.dataset.disabled = 'true';
                     mailto.setAttribute('href', '#');
                     mailto.setAttribute('title', 'Uzupełnij: ' + missing.join(', '));
+                }
+                if (copyBtn) {
+                    copyBtn.classList.add('disabled');
+                    copyBtn.setAttribute('aria-disabled', 'true');
+                    copyBtn.disabled = true;
+                    copyBtn.setAttribute('title', 'Najpierw uzupełnij: ' + missing.join(', '));
                 }
                 return;
             }
@@ -437,6 +462,12 @@
                 mailto.removeAttribute('title');
                 mailto.setAttribute('href', href);
             }
+            if (copyBtn) {
+                copyBtn.classList.remove('disabled');
+                copyBtn.removeAttribute('aria-disabled');
+                copyBtn.disabled = false;
+                copyBtn.removeAttribute('title');
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -449,6 +480,43 @@
                     e.preventDefault();
                 }
             });
+
+            // Kopiowanie do schowka – fallback jeśli mailto nie działa
+            const copyBtn = document.getElementById('copyBtn');
+            const copyStatus = document.getElementById('copyStatus');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', async () => {
+                    const text = buildBody();
+                    let ok = false;
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        ok = true;
+                    } catch (err) {
+                        // Fallback: tymczasowe textarea
+                        try {
+                            const ta = document.createElement('textarea');
+                            ta.value = text;
+                            ta.style.position = 'fixed';
+                            ta.style.top = '-9999px';
+                            document.body.appendChild(ta);
+                            ta.focus();
+                            ta.select();
+                            const res = document.execCommand('copy');
+                            document.body.removeChild(ta);
+                            ok = res;
+                        } catch (e2) {
+                            ok = false;
+                        }
+                    }
+                    if (copyStatus) {
+                        copyStatus.classList.remove('visually-hidden');
+                        copyStatus.textContent = ok ? 'Skopiowano tekst uwagi do schowka.' : 'Nie udało się skopiować – zaznacz i skopiuj ręcznie.';
+                        setTimeout(() => {
+                            copyStatus.classList.add('visually-hidden');
+                        }, 4000);
+                    }
+                });
+            }
             updateUI();
         });
     </script>
